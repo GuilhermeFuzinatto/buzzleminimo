@@ -2,8 +2,8 @@ async function cadastrarTurma(event) {
     event.preventDefault();
 
     const turma = {
-        email: document.getElementById("nome").value,
-        senha: document.getElementById("desc").value
+        nome: document.getElementById("nome").value,
+        desc: document.getElementById("desc").value
     };
 
     try {
