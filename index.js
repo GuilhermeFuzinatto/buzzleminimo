@@ -83,8 +83,12 @@ app.post('/turma', (req, res) => {
 
 });
 
-// Iniciar o servidor
-app.listen(port, '0.0.0.0', () => {
-    console.log(`Servidor rodando na porta ${port}`);
+// Teste para verificar se o servidor está rodando
+app.get('/', (req, res) => {
+    res.send('Servidor está rodando e tabelas criadas!');
 });
 
+// Iniciando o servidor
+app.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`);
+});
