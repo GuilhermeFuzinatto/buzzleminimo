@@ -1,18 +1,18 @@
-async function cadastrarPorra(event) {
+async function cadastrarTurma(event) {
     event.preventDefault();
 
-    const cadastro = {
-        email: document.getElementById("email").value,
-        senha: document.getElementById("senha").value
+    const turma = {
+        email: document.getElementById("nome").value,
+        senha: document.getElementById("desc").value
     };
 
     try {
-        const response = await fetch('/cadastro', {
+        const response = await fetch('/turma', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(cadastro)
+            body: JSON.stringify(turma)
         });
 
         const result = await response.json();
@@ -24,6 +24,6 @@ async function cadastrarPorra(event) {
         }
     } catch (err) {
         console.error("Erro na solicitação:", err);
-        alert("Erro ao cadastrar cliente.");
+        alert("Erro ao cadastrar turma.");
     }
 }
