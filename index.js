@@ -26,7 +26,7 @@ db.serialize(() => {
         CREATE TABLE IF NOT EXISTS cadastro (
             email TEXT PRIMARY KEY,
             senha TEXT
-        )
+        );
 
         CREATE TABLE IF NOT EXISTS turma (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -87,3 +87,4 @@ app.post('/turma', (req, res) => {
 app.listen(port, '0.0.0.0', () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
+
