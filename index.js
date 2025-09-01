@@ -27,9 +27,14 @@ db.serialize(() => {
             email TEXT PRIMARY KEY,
             senha TEXT
         )
+
+        CREATE TABLE IF NOT EXISTS turma (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT,
+            desc TEXT
+        )
     `);
     
-
     console.log('Tabelas criadas com sucesso.');
 });
 
@@ -54,4 +59,31 @@ app.post('/cadastro', (req, res) => {
         res.status(201).send({ id: this.lastID, message: 'cadastrado com sucesso.' });
     });
 
+});
+
+///////////////////////////// Rotas para Turma /////////////////////////////
+///////////////////////////// Rotas para Turma /////////////////////////////
+///////////////////////////// Rotas para Turma /////////////////////////////
+
+// Cadastrar turma
+app.post('/turma', (req, res) => {
+    const { nome, desc } = req.body;
+
+    if (!nome) {
+        return res.status(400).send('nome são obrigatórios.');
+    }
+
+    const query = `INSERT INTO turma (nome, desc) VALUES (?, ?)`;
+    db.run(query, [nome, desc], function (err) {
+        if (err) {
+            return res.status(500).send('Erro ao cadastrar.');
+        }
+        res.status(201).send({ id: this.lastID, message: 'cadastrado com sucesso.' });
+    });
+
+});
+
+// Iniciar o servidor
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Servidor rodando na porta ${port}`);
 });
