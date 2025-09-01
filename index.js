@@ -25,7 +25,7 @@ db.serialize(() => {
     db.run(`
         CREATE TABLE IF NOT EXISTS cadastro (
             email TEXT PRIMARY KEY,
-            senha TEXT,
+            senha TEXT
         )
     `);
     
@@ -53,4 +53,5 @@ app.post('/cadastro', (req, res) => {
         }
         res.status(201).send({ id: this.lastID, message: 'cadastrado com sucesso.' });
     });
+
 });
