@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 // Serve os arquivos estáticos da pasta "public"
 app.use(express.static('public'));
@@ -26,8 +26,9 @@ db.serialize(() => {
         CREATE TABLE IF NOT EXISTS cadastro (
             email TEXT PRIMARY KEY,
             senha TEXT
-        );
-
+        )
+    `);
+    db.run(`
         CREATE TABLE IF NOT EXISTS turma (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT,
@@ -89,6 +90,6 @@ app.get('/', (req, res) => {
 });
 
 // Iniciando o servidor
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
