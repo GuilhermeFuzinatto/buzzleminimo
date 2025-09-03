@@ -62,6 +62,36 @@ app.post('/cadastro', (req, res) => {
 
 });
 
+// Listar cadastros
+// Endpoint para listar todos os cadastros ou buscar por email
+app.get('/cadastro', (req, res) => {
+    const email = req.query.email || '';  // Recebe o email da query string (se houver)
+
+    if (email) {
+        // Se email foi passado, busca cadastros que possuam esse email ou parte dele
+        const query = `SELECT * FROM cadastro WHERE email LIKE ?`;
+
+        db.all(query, [`%${email}%`], (err, rows) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: 'Erro ao buscar cadastros.' });
+            }
+            res.json(rows);  // Retorna os cadastros encontrados ou um array vazio
+        });
+    } else {
+        // Se email não foi passado, retorna todos os cadastros
+        const query = `SELECT * FROM cadastro`;
+
+        db.all(query, (err, rows) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: 'Erro ao buscar cadastros.' });
+            }
+            res.json(rows);  // Retorna todos os cadastros
+        });
+    }
+});
+
 ///////////////////////////// Rotas para Turma /////////////////////////////
 ///////////////////////////// Rotas para Turma /////////////////////////////
 ///////////////////////////// Rotas para Turma /////////////////////////////

@@ -17,11 +17,27 @@
         <a href="turma.html"><button>Criar Turma</button></a>
     </header>
     <main>
+        <div>
         <form id="formolario">
             <input type="text" id="email" placeholder="seu email">
             <input type="password" id="senha" placeholder="sua senha">
             <button onclick="cadastrarPorra(event)">Confirmar</button>
         </form>
+        </div>
+        <button onclick="listarCadastro(event)">Listar cadastros</button>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Senha</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelabunda">
+                    <!-- Linhas serão preenchidas pelo JavaScript -->
+                </tbody>
+            </table>
+        </div>
     </main>
     <footer>
         
