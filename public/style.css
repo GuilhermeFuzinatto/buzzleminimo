@@ -16,9 +16,12 @@ main{
     flex-wrap: wrap;
 }
 
-main div{
+main section{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
+
+
+

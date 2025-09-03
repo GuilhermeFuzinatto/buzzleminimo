@@ -53,8 +53,8 @@ async function listarCadastro() {
             cadastro.forEach(cadastro => {
                 const linha = document.createElement('tr');
                 linha.innerHTML = `
-                    <td>${cliente.email}</td>
-                    <td>${cliente.senha}</td>
+                    <td>${cadastro.email}</td>
+                    <td>${cadastro.senha}</td>
                 `;
                 tabela.appendChild(linha);
             });
