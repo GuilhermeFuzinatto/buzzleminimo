@@ -114,6 +114,36 @@ app.post('/turma', (req, res) => {
 
 });
 
+// Listar turmas
+// Endpoint para listar todas as turmas ou buscar por email
+app.get('/turma', (req, res) => {
+    const nome = req.query.nome || '';  // Recebe o nome da query string (se houver)
+
+    if (nome) {
+        // Se nome foi passado, busca turmas que possuam esse nome ou parte dele
+        const query = `SELECT * FROM turma WHERE nome LIKE ?`;
+
+        db.all(query, [`%${nome}%`], (err, rows) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: 'Erro ao buscar turmas.' });
+            }
+            res.json(rows);  // Retorna as turmas encontradas ou um array vazio
+        });
+    } else {
+        // Se nome não foi passado, retorna todas as turmas
+        const query = `SELECT * FROM turma`;
+
+        db.all(query, (err, rows) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: 'Erro ao buscar turmas.' });
+            }
+            res.json(rows);  // Retorna todas as turmas
+        });
+    }
+});
+
 // Teste para verificar se o servidor está rodando
 app.get('/', (req, res) => {
     res.send('Servidor está rodando e tabelas criadas!');
