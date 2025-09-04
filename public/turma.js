@@ -43,20 +43,22 @@ const nome = document.getElementById('nome').value.trim();  // Pega o valor do n
         const response = await fetch(url);
         const turma = await response.json();
 
-        const tabela = document.getElementById('tabelabunda');
+        const sec = document.getElementById('secsoturmas');
         tabela.innerHTML = ''; // Limpa a tabela antes de preencher
 
-        if (cadastro.length === 0) {
+        if (turma.length === 0) {
             // Caso não encontre cadastros, exibe uma mensagem
-            tabela.innerHTML = '<tr><td colspan="2">Nenhum cadastro encontrado.</td></tr>';
+            sec.innerHTML = '<div>n tem turma<div>';
         } else {
-            cadastro.forEach(cadastro => {
-                const linha = document.createElement('tr');
-                linha.innerHTML = `
-                    <td>${cadastro.email}</td>
-                    <td>${cadastro.senha}</td>
+            turma.forEach(turma => {
+                /*sec.innerHTML = `
+                    <td>${turma.email}</td>
+                    <td>${turma.senha}</td>
                 `;
-                tabela.appendChild(linha);
+                */
+                sec.innerHTML = `
+                    <div>${turma.nome}${turma.desc}</div>
+                `
             });
         }
     } catch (error) {
