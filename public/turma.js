@@ -19,6 +19,7 @@ async function cadastrarTurma(event) {
         if (response.ok) {
             alert("cadastrado com sucesso!");
             document.getElementById("formolario").reset();
+            listarTurma(); // atualiza lista automaticamente
         } else {
             alert(`Erro: ${result.message}`);
         }
@@ -44,7 +45,7 @@ const nome = document.getElementById('nome').value.trim();  // Pega o valor do n
         const turma = await response.json();
 
         const sec = document.getElementById('secsoturmas');
-        tabela.innerHTML = ''; // Limpa a tabela antes de preencher
+        sec.innerHTML = ''; // Limpa a tabela antes de preencher
 
         if (turma.length === 0) {
             // Caso não encontre cadastros, exibe uma mensagem
@@ -56,7 +57,7 @@ const nome = document.getElementById('nome').value.trim();  // Pega o valor do n
                     <td>${turma.senha}</td>
                 `;
                 */
-                sec.innerHTML = `
+                sec.innerHTML += `
                     <div>${turma.nome}${turma.desc}</div>
                 `
             });
