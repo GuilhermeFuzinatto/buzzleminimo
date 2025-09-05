@@ -1,30 +1,62 @@
-async function cadastrarPorra(event) {
+async function cadastrarAluno(event) {
     event.preventDefault();
 
-    const cadastro = {
-        email: document.getElementById("email").value,
-        senha: document.getElementById("senha").value
+    const aluno = {
+        email: document.getElementById("al_email").value,
+        nome: document.getElementById("al_nome").value,
+        senha: document.getElementById("al_senha").value
     };
 
     try {
-        const response = await fetch('/cadastro', {
+        const response = await fetch('/aluno', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(cadastro)
+            body: JSON.stringify(aluno)
         });
 
         const result = await response.json();
         if (response.ok) {
             alert("cadastrado com sucesso!");
-            document.getElementById("formolario").reset();
+            document.getElementById("al_formolario").reset();
         } else {
             alert(`Erro: ${result.message}`);
         }
     } catch (err) {
         console.error("Erro na solicitação:", err);
-        alert("Erro ao cadastrar cliente.");
+        alert("Erro ao cadastrar aluno.");
+    }
+}
+
+async function cadastrarProf(event) {
+    event.preventDefault();
+
+    const aluno = {
+        email: document.getElementById("pr_email").value,
+        nome: document.getElementById("pr_nome").value,
+        senha: document.getElementById("pr_senha").value
+    };
+
+    try {
+        const response = await fetch('/prof', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(prof)
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert("cadastrado com sucesso!");
+            document.getElementById("pr_formolario").reset();
+        } else {
+            alert(`Erro: ${result.message}`);
+        }
+    } catch (err) {
+        console.error("Erro na solicitação:", err);
+        alert("Erro ao cadastrar professor.");
     }
 }
 

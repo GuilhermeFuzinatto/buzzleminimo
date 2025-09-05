@@ -86,11 +86,11 @@ db.serialize(() => {
 });
 
 
-///////////////////////////// Rotas para Cadastro /////////////////////////////
-///////////////////////////// Rotas para Cadastro /////////////////////////////
-///////////////////////////// Rotas para Cadastro /////////////////////////////
+///////////////////////////// Rotas para Aluno /////////////////////////////
+///////////////////////////// Rotas para Aluno /////////////////////////////
+///////////////////////////// Rotas para Aluno /////////////////////////////
 
-// Cadastrar porra
+// Cadastrar aluno
 app.post('/aluno', (req, res) => {
     const { email, nome, senha } = req.body;
 
@@ -99,7 +99,29 @@ app.post('/aluno', (req, res) => {
     }
 
     const query = `INSERT INTO Aluno (al_email, al_nome, al_senha) VALUES (?, ?, ?)`;
-    db.run(query, [email, senha], function (err) {
+    db.run(query, [email, nome, senha], function (err) {
+        if (err) {
+            return res.status(500).send('Erro ao cadastrar.');
+        }
+        res.status(201).send({ id: this.lastID, message: 'cadastrado com sucesso.' });
+    });
+
+});
+
+///////////////////////////// Rotas para Prof /////////////////////////////
+///////////////////////////// Rotas para Prof /////////////////////////////
+///////////////////////////// Rotas para Prof /////////////////////////////
+
+// Cadastrar prof
+app.post('/prof', (req, res) => {
+    const { email, nome, senha } = req.body;
+
+    if (!email || !nome || !senha) {
+        return res.status(400).send('todos os campos são obrigatórios.');
+    }
+
+    const query = `INSERT INTO Aluno (pr_email, pr_nome, pr_senha) VALUES (?, ?, ?)`;
+    db.run(query, [email, nome, senha], function (err) {
         if (err) {
             return res.status(500).send('Erro ao cadastrar.');
         }
