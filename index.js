@@ -215,7 +215,7 @@ app.post('/turma', (req, res) => {
         }
 
         // Se encontrou o professor, insere a turma
-        const query = `INSERT INTO turma (nome, desc, prid) VALUES (?, ?, ?)`;
+        const query = `INSERT INTO turma (tu_nome, tu_desc, tu_pr_id) VALUES (?, ?, ?)`;
         db.run(query, [nome, desc, prid], function (err) {
             if (err) {
                 return res.status(500).send('Erro ao cadastrar.');
