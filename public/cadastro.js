@@ -35,13 +35,13 @@ async function listarAluno() {
     /*
     const email = document.getElementById('email').value.trim();  // Pega o valor do email digitado no input
 
-    let url = '/cadastro';  // URL padrão para todos os clientes
-
     if (email) {
         // Se CPF foi digitado, adiciona o parâmetro de consulta
         url += `?email=${email}`;
     }
     */
+
+    let url = '/aluno';  // URL padrão para todos os clientes
 
     try {
         const response = await fetch(url);
@@ -54,12 +54,12 @@ async function listarAluno() {
             // Caso não encontre cadastros, exibe uma mensagem
             tabela.innerHTML = '<tr><td colspan="2">Nenhum cadastro encontrado.</td></tr>';
         } else {
-            cadastro.forEach(aluno => {
+            aluno.forEach(aluno => {
                 const linha = document.createElement('tr');
                 linha.innerHTML = `
-                    <td>${aluno.email}</td>
-                    <td>${aluno.nome}</td>
-                    <td>${aluno.senha}</td>
+                    <td>${aluno.al_email}</td>
+                    <td>${aluno.al_nome}</td>
+                    <td>${aluno.al_senha}</td>
                 `;
                 tabela.appendChild(linha);
             });
@@ -106,13 +106,13 @@ async function listarProf() {
     /*
     const email = document.getElementById('email').value.trim();  // Pega o valor do email digitado no input
 
-    let url = '/cadastro';  // URL padrão para todos os clientes
-
     if (email) {
         // Se CPF foi digitado, adiciona o parâmetro de consulta
         url += `?email=${email}`;
     }
     */
+
+    let url = '/prof';  // URL padrão para todos os clientes
 
     try {
         const response = await fetch(url);
@@ -125,12 +125,12 @@ async function listarProf() {
             // Caso não encontre cadastros, exibe uma mensagem
             tabela.innerHTML = '<tr><td colspan="2">Nenhum cadastro encontrado.</td></tr>';
         } else {
-            cadastro.forEach(prof => {
+            prof.forEach(prof => {
                 const linha = document.createElement('tr');
                 linha.innerHTML = `
-                    <td>${prof.email}</td>
-                    <td>${prof.nome}</td>
-                    <td>${prof.senha}</td>
+                    <td>${prof.pr_email}</td>
+                    <td>${prof.pr_nome}</td>
+                    <td>${prof.pr_senha}</td>
                 `;
                 tabela.appendChild(linha);
             });

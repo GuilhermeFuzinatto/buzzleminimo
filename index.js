@@ -42,7 +42,6 @@ db.serialize(() => {
             pr_nivel INTEGER
         )
     `);
-    /*
     db.run(`
         CREATE TABLE IF NOT EXISTS Turma(
             tu_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -52,7 +51,6 @@ db.serialize(() => {
             FOREIGN KEY (tu_pr_id) REFERENCES Prof (pr_id)
         )
     `);
-    */
     /*
     db.run(`
         CREATE TABLE IF NOT EXISTS Quiz(
@@ -105,7 +103,37 @@ app.post('/aluno', (req, res) => {
         }
         res.status(201).send({ id: this.lastID, message: 'cadastrado com sucesso.' });
     });
+});
 
+// Listar alunos
+// Endpoint para listar todos alunos, oq é referente a busca ta comentado
+app.get('/aluno', (req, res) => {
+    /*
+    const email = req.query.email || '';  // Recebe o email da query string (se houver)
+
+    if (email) {
+        // Se email foi passado, busca cadastros que possuam esse email ou parte dele
+        const query = `SELECT * FROM cadastro WHERE email LIKE ?`;
+
+        db.all(query, [`%${email}%`], (err, rows) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: 'Erro ao buscar cadastros.' });
+            }
+            res.json(rows);  // Retorna os cadastros encontrados ou um array vazio
+        });
+    } else {
+    */
+        // Se email não foi passado, retorna todos os cadastros
+        const query = `SELECT * FROM Aluno`;
+
+        db.all(query, (err, rows) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: 'Erro ao buscar cadastros.' });
+            }
+            res.json(rows);  // Retorna todos os cadastros
+        });
 });
 
 ///////////////////////////// Rotas para Prof /////////////////////////////
@@ -131,8 +159,9 @@ app.post('/prof', (req, res) => {
 });
 
 // Listar professores
-// Endpoint para listar todos professores ou buscar por email
-app.get('/cadastro', (req, res) => {
+// Endpoint para listar todos professores, oq é referente a busca ta comentado
+app.get('/prof', (req, res) => {
+    /*
     const email = req.query.email || '';  // Recebe o email da query string (se houver)
 
     if (email) {
@@ -147,8 +176,9 @@ app.get('/cadastro', (req, res) => {
             res.json(rows);  // Retorna os cadastros encontrados ou um array vazio
         });
     } else {
+    */
         // Se email não foi passado, retorna todos os cadastros
-        const query = `SELECT * FROM cadastro`;
+        const query = `SELECT * FROM Prof`;
 
         db.all(query, (err, rows) => {
             if (err) {
@@ -157,7 +187,6 @@ app.get('/cadastro', (req, res) => {
             }
             res.json(rows);  // Retorna todos os cadastros
         });
-    }
 });
 
 ///////////////////////////// Rotas para Turma /////////////////////////////
