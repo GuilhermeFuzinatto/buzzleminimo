@@ -57,6 +57,7 @@ async function listarAluno() {
             aluno.forEach(aluno => {
                 const linha = document.createElement('tr');
                 linha.innerHTML = `
+                    <td>${aluno.al_id}</td>
                     <td>${aluno.al_email}</td>
                     <td>${aluno.al_nome}</td>
                     <td>${aluno.al_senha}</td>
@@ -128,6 +129,7 @@ async function listarProf() {
             prof.forEach(prof => {
                 const linha = document.createElement('tr');
                 linha.innerHTML = `
+                    <td>${prof.pr_id}</td>
                     <td>${prof.pr_email}</td>
                     <td>${prof.pr_nome}</td>
                     <td>${prof.pr_senha}</td>

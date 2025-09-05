@@ -195,21 +195,36 @@ app.get('/prof', (req, res) => {
 
 // Cadastrar turma
 app.post('/turma', (req, res) => {
-    const { nome, desc } = req.body;
+    const { nome, desc, prid } = req.body;
 
-    if (!nome) {
-        return res.status(400).send('nome são obrigatórios.');
+    if (!nome || !prid) {
+        return res.status(400).send('nome e id do professor são obrigatórios.');
     }
 
-    const query = `INSERT INTO turma (nome, desc) VALUES (?, ?)`;
-    db.run(query, [nome, desc], function (err) {
+    // Verifica se o professor existe
+    const checkProf = `SELECT * FROM Prof WHERE pr_id = ?`;
+    db.get(checkProf, [prid], (err, row) => {
         if (err) {
-            return res.status(500).send('Erro ao cadastrar.');
+            console.error(err);
+            return res.status(500).send('Erro ao verificar professor.');
         }
-        res.status(201).send({ id: this.lastID, message: 'cadastrado com sucesso.' });
-    });
 
+        if (!row) {
+            // Se não encontrou o professor
+            return res.status(400).send('ID do professor não encontrado.');
+        }
+
+        // Se encontrou o professor, insere a turma
+        const query = `INSERT INTO turma (nome, desc, prid) VALUES (?, ?, ?)`;
+        db.run(query, [nome, desc, prid], function (err) {
+            if (err) {
+                return res.status(500).send('Erro ao cadastrar.');
+            }
+            res.status(201).send({ id: this.lastID, message: 'cadastrado com sucesso.' });
+        });
+    });
 });
+
 
 // Listar turmas
 // Endpoint para listar todas as turmas ou buscar por email

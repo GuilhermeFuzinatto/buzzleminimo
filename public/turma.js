@@ -3,7 +3,8 @@ async function cadastrarTurma(event) {
 
     const turma = {
         nome: document.getElementById("nome").value,
-        desc: document.getElementById("desc").value
+        desc: document.getElementById("desc").value,
+        prid: document.getElementById("prid").value
     };
 
     try {
@@ -58,7 +59,7 @@ const nome = document.getElementById('nome').value.trim();  // Pega o valor do n
                 `;
                 */
                 sec.innerHTML += `
-                    <div>${turma.nome}${turma.desc}</div>
+                    <div>${turma.tu_id}${turma.tu_nome}${turma.tu_desc}${turma.tu_pr_id}</div>
                 `
             });
         }
