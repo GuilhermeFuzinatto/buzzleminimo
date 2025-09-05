@@ -1,0 +1,126 @@
+/*criação da tabela Aluno e seus atributos*/
+CREATE TABLE IF NOT EXISTS Aluno(
+  	al_id VARCHAR(12) PRIMARY KEY UNIQUE,
+  	al_email TEXT UNIQUE NOT NULL,
+  	al_nome TEXT NOT NULL,
+  	al_senha TEXT NOT NULL,
+  	al_bio VARCHAR(200),
+	al_nivel INTEGER
+);
+
+/*criação da tabela Prof e seus atributos*/
+CREATE TABLE IF NOT EXISTS Prof(
+  	pr_id VARCHAR(12) PRIMARY KEY UNIQUE AUTOINCREMENT,
+  	pr_email TEXT UNIQUE NOT NULL,
+  	pr_nome TEXT NOT NULL,
+  	pr_senha TEXT NOT NULL,
+  	pr_bio VARCHAR(200),
+	pr_nivel INTEGER
+);
+
+/*criação da tabela Turma e seus atributos*/
+CREATE TABLE IF NOT EXISTS Turma(
+  	tu_id VARCHAR(12) PRIMARY KEY UNIQUE,
+  	tu_nome VARCHAR(40) NOT NULL,
+  	tu_desc VARCHAR(120),
+  	tu_pr_id VARCHAR(12),
+  	FOREIGN KEY (tu_pr_id) REFERENCES Prof (pr_id)
+);
+
+/*criação da tabela de relacionamento Aluno - Turma e seus atributos*/
+CREATE TABLE IF NOT EXISTS AlunoTurma(
+  	AT_tu_id VARCHAR(12),
+    AT_al_id VARCHAR(12),
+    PRIMARY KEY (AT_tu_id, AT_al_id),
+    FOREIGN KEY (AT_tu_id) REFERENCES Turma (tu_id),
+    FOREIGN KEY (AT_al_id) REFERENCES Aluno (al_id)
+);
+
+/*criação da tabela Quiz e seus atributos*/
+CREATE TABLE IF NOT EXISTS Quiz(
+  	qz_id VARCHAR(12) PRIMARY KEY UNIQUE,
+  	qz_valor INTEGER NOT NULL,
+  	qz_prazo DATE NOT NULL,
+  	qz_pr_id VARCHAR(12),
+  	FOREIGN KEY (qz_pr_id) REFERENCES Prof (pr_id)
+);
+
+/*criação da tabela Pergunta e seus atributos*/
+CREATE TABLE IF NOT EXISTS Pergunta(
+  	pe_numero INTEGER AUTOINCREMENT PRIMARY KEY,
+  	pe_enunciado VARCHAR(200) NOT NULL,
+  	pe_qz_id VARCHAR(12),
+  	FOREIGN KEY (pe_qz_id) REFERENCES Quiz (qz_id)
+);
+
+/*criação da tabela Alternativa e seus atributos*/
+CREATE TABLE IF NOT EXISTS Alternativa(
+  	av_numero INTEGER AUTOINCREMENT PRIMARY KEY,
+  	av_texto VARCHAR(120) NOT NULL,
+  	av_correta BIT, /*status*/
+  	av_pe_numero INTEGER,
+  	FOREIGN KEY (av_pe_numero) REFERENCES Pergunta (pe_numero)
+);
+
+/*criação da tabela Resposta e seus atributos*/
+CREATE TABLE IF NOT EXISTS Resposta(
+  	re_id VARCHAR(12) PRIMARY KEY UNIQUE,
+  	re_data DATE,
+  	re_hora TIME,
+  	re_certas INTEGER,
+  	re_nota INTEGER,
+  	re_al_id VARCHAR(12),
+  	re_qz_id VARCHAR(12),
+  	FOREIGN KEY (re_al_id) REFERENCES Aluno (al_id),
+  	foreign key (re_qz_id) references Quiz (qz_id)
+);
+
+/*
+/*preenchimento de dados da tabela Aluno*/
+insert into Aluno (al_id, al_email, al_nome, al_senha, al_nascimento)
+values
+('696969696969', 'vaitomanocu@gmail.com', 'caio', 'qnasdpop', '2008-08-15'),
+('420420420420', 'vaisefude@gmail.com', 'chupacul', 'asdfg4', '1998-09-08'),
+('777777777777', 'vaiprocaralho@hotmail.com', 'denis', 'sfkvsf', '2001-09-11');
+
+/*preenchimento de dados da tabela Prof*/
+INSERT INTO Prof (pr_id, pr_email, pr_nome, pr_senha, pr_nivel, pr_nascimento) VALUES
+('111111111111', 'fodaseprof1@gmail.com', 'Marcos PauNoCu', 'senha123', 5, '1980-05-10'),
+('222222222222', 'profcaralhudo@escola.com', 'Luciana Treta', 'abc123', 4, '1985-03-21'),
+('333333333333', 'ensinaessaPorra@zmail.com', 'Jorge Krl', 'senhafoda', 3, '1990-12-01');
+
+/*preenchimento de dados da tabela Turma*/
+INSERT INTO Turma (tu_id, tu_pr_id) VALUES
+('TURMA001', '111111111111'),
+('TURMA002', '222222222222'),
+('TURMA003', '333333333333');
+
+/*preenchimento de dados da tabela Quiz*/
+INSERT INTO Quiz (qz_id, qz_enunciado, qz_alternativa, qz_certa, qz_valor, qz_prazo, qz_pr_id) VALUES
+('QUIZ001', 'Qual o caralho do resultado de 2+2?', 'a) 3; b) 4; c) 5', 'b) 4', 10, '2025-06-20', '111111111111'),
+('QUIZ002', 'Essa porra de equação x^2 = 9 tem qual raiz positiva?', 'a) 3; b) -3; c) Foda-se', 'a) 3', 10, '2025-06-25', '222222222222'),
+('QUIZ003', 'Descubra o cu da capital da França', 'a) Paris; b) Roma; c) Vai tomar no cu', 'a) Paris', 15, '2025-06-30', '333333333333');
+
+/*preenchimento de dados da tabela de relacionamento Aluno - Turma*/
+insert into AlunoTurma (AT_tu_id, AT_al_id) values
+('TURMA001', '696969696969'),
+('TURMA001', '420420420420'),
+('TURMA001', '777777777777'),
+('TURMA002', '696969696969'),
+('TURMA002', '420420420420'),
+('TURMA003', '696969696969');
+*/
+
+/*
+/*visualização das turmas e os alunos q estão nelas*/
+CREATE VIEW AlunosPorTurma AS
+SELECT
+Turma.tu_id,
+Aluno.al_id,
+Aluno.al_nome
+From AlunoTurma
+JOIN Aluno ON AlunoTurma.AT_al_id = Aluno.al_id
+JOIN Turma ON AlunoTurma.AT_tu_id = Turma.tu_id;
+
+SELECT * from AlunosPorTurma;
+*/

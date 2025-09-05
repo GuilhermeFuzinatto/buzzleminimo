@@ -23,19 +23,65 @@ const db = new sqlite3.Database('./database.db', (err) => {
 // Criação das tabelas
 db.serialize(() => {
     db.run(`
-        CREATE TABLE IF NOT EXISTS cadastro (
-            email TEXT PRIMARY KEY,
-            senha TEXT
+        CREATE TABLE IF NOT EXISTS Aluno(
+            al_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            al_email TEXT UNIQUE NOT NULL,
+            al_nome TEXT NOT NULL,
+            al_senha TEXT NOT NULL,
+            al_bio VARCHAR(200),
+            al_nivel INTEGER
         )
     `);
     db.run(`
-        CREATE TABLE IF NOT EXISTS turma (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome TEXT,
-            desc TEXT
+        CREATE TABLE IF NOT EXISTS Prof(
+            pr_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            pr_email TEXT UNIQUE NOT NULL,
+            pr_nome TEXT NOT NULL,
+            pr_senha TEXT NOT NULL,
+            pr_bio VARCHAR(200),
+            pr_nivel INTEGER
         )
     `);
-    
+    /*
+    db.run(`
+        CREATE TABLE IF NOT EXISTS Turma(
+            tu_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            tu_nome VARCHAR(40) NOT NULL,
+            tu_desc VARCHAR(120),
+            tu_pr_id VARCHAR(12),
+            FOREIGN KEY (tu_pr_id) REFERENCES Prof (pr_id)
+        )
+    `);
+    */
+    /*
+    db.run(`
+        CREATE TABLE IF NOT EXISTS Quiz(
+            qz_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            qz_valor INTEGER NOT NULL,
+            qz_prazo DATE NOT NULL,
+            qz_pr_id VARCHAR(12),
+            FOREIGN KEY (qz_pr_id) REFERENCES Prof (pr_id)
+        )
+    `);
+    db.run(`
+        CREATE TABLE IF NOT EXISTS Pergunta(
+            pe_numero INTEGER AUTOINCREMENT PRIMARY KEY,
+            pe_enunciado VARCHAR(200) NOT NULL,
+            pe_qz_id VARCHAR(12),
+            FOREIGN KEY (pe_qz_id) REFERENCES Quiz (qz_id)
+        )
+    `);
+    db.run(`
+        CREATE TABLE IF NOT EXISTS Alternativa(
+            av_numero INTEGER AUTOINCREMENT PRIMARY KEY,
+            av_texto VARCHAR(120) NOT NULL,
+            av_correta BIT,
+            av_pe_numero INTEGER,
+            FOREIGN KEY (av_pe_numero) REFERENCES Pergunta (pe_numero)
+        )
+    `);
+    */
+
     console.log('Tabelas criadas com sucesso.');
 });
 
@@ -45,14 +91,14 @@ db.serialize(() => {
 ///////////////////////////// Rotas para Cadastro /////////////////////////////
 
 // Cadastrar porra
-app.post('/cadastro', (req, res) => {
-    const { email, senha } = req.body;
+app.post('/aluno', (req, res) => {
+    const { email, nome, senha } = req.body;
 
-    if (!email || !senha) {
-        return res.status(400).send('email e senha são obrigatórios.');
+    if (!email || !nome || !senha) {
+        return res.status(400).send('todos os campos são obrigatórios.');
     }
 
-    const query = `INSERT INTO cadastro (email, senha) VALUES (?, ?)`;
+    const query = `INSERT INTO Aluno (al_email, al_nome, al_senha) VALUES (?, ?, ?)`;
     db.run(query, [email, senha], function (err) {
         if (err) {
             return res.status(500).send('Erro ao cadastrar.');
