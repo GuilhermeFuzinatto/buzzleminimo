@@ -37,16 +37,30 @@
                 </form>
             </div>
         </section>
-        <button onclick="listarCadastro()">Listar cadastros</button>
+        <button onclick="listarAluno()">Listar alunos</button>
+        <button onclick="listarProf()">Listar professores</button>
         <section>
             <table>
                 <thead>
                     <tr>
                         <th>Email</th>
+                        <th>Nome</th>
                         <th>Senha</th>
                     </tr>
                 </thead>
-                <tbody id="tabelabunda">
+                <tbody id="tabelaaluno">
+                    <!-- Linhas serão preenchidas pelo JavaScript -->
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Nome</th>
+                        <th>Senha</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaprof">
                     <!-- Linhas serão preenchidas pelo JavaScript -->
                 </tbody>
             </table>

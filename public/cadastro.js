@@ -1,3 +1,4 @@
+//Cadastrar Aluno
 async function cadastrarAluno(event) {
     event.preventDefault();
 
@@ -29,10 +30,50 @@ async function cadastrarAluno(event) {
     }
 }
 
+// Função para listar todos os alunos, oq era sobre buscar foi comentado
+async function listarAluno() {
+    /*
+    const email = document.getElementById('email').value.trim();  // Pega o valor do email digitado no input
+
+    let url = '/cadastro';  // URL padrão para todos os clientes
+
+    if (email) {
+        // Se CPF foi digitado, adiciona o parâmetro de consulta
+        url += `?email=${email}`;
+    }
+    */
+
+    try {
+        const response = await fetch(url);
+        const aluno = await response.json();
+
+        const tabela = document.getElementById('tabelaaluno');
+        tabela.innerHTML = ''; // Limpa a tabela antes de preencher
+
+        if (aluno.length === 0) {
+            // Caso não encontre cadastros, exibe uma mensagem
+            tabela.innerHTML = '<tr><td colspan="2">Nenhum cadastro encontrado.</td></tr>';
+        } else {
+            cadastro.forEach(aluno => {
+                const linha = document.createElement('tr');
+                linha.innerHTML = `
+                    <td>${aluno.email}</td>
+                    <td>${aluno.nome}</td>
+                    <td>${aluno.senha}</td>
+                `;
+                tabela.appendChild(linha);
+            });
+        }
+    } catch (error) {
+        console.error('Erro ao listar cadastros:', error);
+    }
+}
+
+//Cadastrar Prof
 async function cadastrarProf(event) {
     event.preventDefault();
 
-    const aluno = {
+    const prof = {
         email: document.getElementById("pr_email").value,
         nome: document.getElementById("pr_nome").value,
         senha: document.getElementById("pr_senha").value
@@ -60,8 +101,9 @@ async function cadastrarProf(event) {
     }
 }
 
-// Função para listar todos os cadastros ou buscar clientes por email
-async function listarCadastro() {
+// Função para listar todos os professores, oq era sobre buscar foi comentado
+async function listarProf() {
+    /*
     const email = document.getElementById('email').value.trim();  // Pega o valor do email digitado no input
 
     let url = '/cadastro';  // URL padrão para todos os clientes
@@ -70,23 +112,25 @@ async function listarCadastro() {
         // Se CPF foi digitado, adiciona o parâmetro de consulta
         url += `?email=${email}`;
     }
+    */
 
     try {
         const response = await fetch(url);
-        const cadastro = await response.json();
+        const prof = await response.json();
 
-        const tabela = document.getElementById('tabelabunda');
+        const tabela = document.getElementById('tabelaprof');
         tabela.innerHTML = ''; // Limpa a tabela antes de preencher
 
-        if (cadastro.length === 0) {
+        if (prof.length === 0) {
             // Caso não encontre cadastros, exibe uma mensagem
             tabela.innerHTML = '<tr><td colspan="2">Nenhum cadastro encontrado.</td></tr>';
         } else {
-            cadastro.forEach(cadastro => {
+            cadastro.forEach(prof => {
                 const linha = document.createElement('tr');
                 linha.innerHTML = `
-                    <td>${cadastro.email}</td>
-                    <td>${cadastro.senha}</td>
+                    <td>${prof.email}</td>
+                    <td>${prof.nome}</td>
+                    <td>${prof.senha}</td>
                 `;
                 tabela.appendChild(linha);
             });

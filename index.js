@@ -120,7 +120,7 @@ app.post('/prof', (req, res) => {
         return res.status(400).send('todos os campos são obrigatórios.');
     }
 
-    const query = `INSERT INTO Aluno (pr_email, pr_nome, pr_senha) VALUES (?, ?, ?)`;
+    const query = `INSERT INTO Prof (pr_email, pr_nome, pr_senha) VALUES (?, ?, ?)`;
     db.run(query, [email, nome, senha], function (err) {
         if (err) {
             return res.status(500).send('Erro ao cadastrar.');
@@ -130,8 +130,8 @@ app.post('/prof', (req, res) => {
 
 });
 
-// Listar cadastros
-// Endpoint para listar todos os cadastros ou buscar por email
+// Listar professores
+// Endpoint para listar todos professores ou buscar por email
 app.get('/cadastro', (req, res) => {
     const email = req.query.email || '';  // Recebe o email da query string (se houver)
 
