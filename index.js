@@ -62,7 +62,7 @@ db.serialize(() => {
     `);
     db.run(`
         CREATE TABLE IF NOT EXISTS Pergunta(
-            pe_numero INTEGER AUTOINCREMENT PRIMARY KEY,
+            pe_numero INTEGER PRIMARY KEY AUTOINCREMENT,
             pe_enunciado VARCHAR(200) NOT NULL,
             pe_qz_id VARCHAR(12),
             FOREIGN KEY (pe_qz_id) REFERENCES Quiz (qz_id)
@@ -70,7 +70,7 @@ db.serialize(() => {
     `);
     db.run(`
         CREATE TABLE IF NOT EXISTS Alternativa(
-            av_numero INTEGER AUTOINCREMENT PRIMARY KEY,
+            av_numero INTEGER PRIMMARY KEY AUTOINCREMENT,
             av_texto VARCHAR(120) NOT NULL,
             av_correta BIT,
             av_pe_numero INTEGER,
