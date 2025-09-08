@@ -4,7 +4,7 @@ async function maisPergunta(){
 
     if(totalp > 1){
         const divpassado = document.getElementById("divpe");
-        divpassado /*continuar isso aq*/
+        divpassado.removeAttribute("id");
     }
 
     fml.innerHTML += `
