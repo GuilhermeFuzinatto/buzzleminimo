@@ -70,7 +70,7 @@ db.serialize(() => {
     `);
     db.run(`
         CREATE TABLE IF NOT EXISTS Alternativa(
-            av_numero INTEGER PRIMMARY KEY AUTOINCREMENT,
+            av_numero INTEGER PRIMARY KEY AUTOINCREMENT,
             av_texto VARCHAR(120) NOT NULL,
             av_correta BIT,
             av_pe_numero INTEGER,
