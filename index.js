@@ -51,7 +51,6 @@ db.serialize(() => {
             FOREIGN KEY (tu_pr_id) REFERENCES Prof (pr_id)
         )
     `);
-    /*
     db.run(`
         CREATE TABLE IF NOT EXISTS Quiz(
             qz_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -78,7 +77,6 @@ db.serialize(() => {
             FOREIGN KEY (av_pe_numero) REFERENCES Pergunta (pe_numero)
         )
     `);
-    */
 
     console.log('Tabelas criadas com sucesso.');
 });
