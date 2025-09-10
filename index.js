@@ -135,8 +135,8 @@ app.get('/aluno', (req, res) => {
 });
 
 // Atualizar aluno
-app.put('/aluno/al_email/:al_email', (req, res) => {
-    const { email } = req.params;
+app.put('/aluno/email/:email', (req, res) => {
+    const { al_email } = req.params;
     const { nome, senha} = req.body;
 
     const query = `UPDATE aluno SET al_nome = ?, al_senha = ? WHERE al_email = ?`;
@@ -205,7 +205,7 @@ app.get('/prof', (req, res) => {
 });
 
 // Atualizar professores
-app.put('/prof/pr_email/:pr_email', (req, res) => {
+app.put('/prof/email/:email', (req, res) => {
     const { email } = req.params;
     const { nome, senha} = req.body;
 
