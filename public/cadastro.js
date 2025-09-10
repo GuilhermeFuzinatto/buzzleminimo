@@ -70,6 +70,39 @@ async function listarAluno() {
     }
 }
 
+// Função para atualizar as informações do aluno
+async function atualizarAluno() {
+    const nome = document.getElementById('al_nome').value;
+    const email = document.getElementById('al_email').value;
+    const senha = document.getElementById('al_senha').value;
+
+    const alunoAtualizado = {
+        nome,
+        email,
+        senha
+    };
+
+    try {
+        const response = await fetch(`/aluno/al_email/${email}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(alunoAtualizado)
+        });
+
+        if (response.ok) {
+            alert('Aluno atualizado com sucesso!');
+        } else {
+            const errorMessage = await response.text();
+            alert('Erro ao atualizar aluno: ' + errorMessage);
+        }
+    } catch (error) {
+        console.error('Erro ao atualizar aluno:', error);
+        alert('Erro ao atualizar aluno.');
+    }
+}
+
 //Cadastrar Prof
 async function cadastrarProf(event) {
     event.preventDefault();
@@ -139,5 +172,38 @@ async function listarProf() {
         }
     } catch (error) {
         console.error('Erro ao listar cadastros:', error);
+    }
+}
+
+// Função para atualizar as informações do professor
+async function atualizarProf() {
+    const nome = document.getElementById('pr_nome').value;
+    const email = document.getElementById('pr_email').value;
+    const senha = document.getElementById('pr_senha').value;
+
+    const profAtualizado = {
+        nome,
+        email,
+        senha
+    };
+
+    try {
+        const response = await fetch(`/prof/pr_email/${email}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(profAtualizado)
+        });
+
+        if (response.ok) {
+            alert('Professor atualizado com sucesso!');
+        } else {
+            const errorMessage = await response.text();
+            alert('Erro ao atualizar professor: ' + errorMessage);
+        }
+    } catch (error) {
+        console.error('Erro ao atualizar professor:', error);
+        alert('Erro ao atualizar professor.');
     }
 }
