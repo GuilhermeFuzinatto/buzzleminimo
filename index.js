@@ -134,6 +134,23 @@ app.get('/aluno', (req, res) => {
         });
 });
 
+// Atualizar aluno
+app.put('/aluno/al_email/:al_email', (req, res) => {
+    const { email } = req.params;
+    const { nome, senha} = req.body;
+
+    const query = `UPDATE aluno SET al_nome = ?, al_senha = ? WHERE al_email = ?`;
+    db.run(query, [nome, senha, email], function (err) {
+        if (err) {
+            return res.status(500).send('Erro ao atualizar aluno.');
+        }
+        if (this.changes === 0) {
+            return res.status(404).send('Aluno não encontrado.');
+        }
+        res.send('Aluno atualizado com sucesso.');
+    });
+});
+
 ///////////////////////////// Rotas para Prof /////////////////////////////
 ///////////////////////////// Rotas para Prof /////////////////////////////
 ///////////////////////////// Rotas para Prof /////////////////////////////
@@ -185,6 +202,23 @@ app.get('/prof', (req, res) => {
             }
             res.json(rows);  // Retorna todos os cadastros
         });
+});
+
+// Atualizar professores
+app.put('/prof/pr_email/:pr_email', (req, res) => {
+    const { email } = req.params;
+    const { nome, senha} = req.body;
+
+    const query = `UPDATE prof SET pr_nome = ?, pr_senha = ? WHERE pr_email = ?`;
+    db.run(query, [nome, senha, email], function (err) {
+        if (err) {
+            return res.status(500).send('Erro ao atualizar professores.');
+        }
+        if (this.changes === 0) {
+            return res.status(404).send('Professores não encontrado.');
+        }
+        res.send('Professores atualizado com sucesso.');
+    });
 });
 
 ///////////////////////////// Rotas para Turma /////////////////////////////
