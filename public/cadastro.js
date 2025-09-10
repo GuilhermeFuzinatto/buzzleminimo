@@ -83,7 +83,7 @@ async function atualizarAluno() {
     };
 
     try {
-        const response = await fetch(`/aluno/al_email/${email}`, {
+        const response = await fetch(`/aluno/email/${email}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -188,7 +188,7 @@ async function atualizarProf() {
     };
 
     try {
-        const response = await fetch(`/prof/pr_email/${email}`, {
+        const response = await fetch(`/prof/email/${email}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

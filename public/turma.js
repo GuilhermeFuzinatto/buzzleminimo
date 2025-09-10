@@ -59,11 +59,47 @@ const nome = document.getElementById('nome').value.trim();  // Pega o valor do n
                 `;
                 */
                 sec.innerHTML += `
-                    <div>${turma.tu_id}${turma.tu_nome}${turma.tu_desc}${turma.tu_pr_id}</div>
+                    <div>
+                        ${turma.tu_id}
+                        ${turma.tu_nome}
+                        ${turma.tu_desc}
+                        ${turma.tu_pr_id}
+                    </div>
                 `
             });
         }
     } catch (error) {
         console.error('Erro ao listar cadastros:', error);
+    }
+}
+
+// Função para atualizar as informações da turma
+async function atualizarTurma() {
+    const nome = document.getElementById('tu_nome').value;
+    const desc = document.getElementById('tu_desc').value;
+
+    const turmaAtualizado = {
+        nome,
+        desc
+    };
+
+    try {
+        const response = await fetch(`/turma/id/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(turmaAtualizado)
+        });
+
+        if (response.ok) {
+            alert('Turma atualizada com sucesso!');
+        } else {
+            const errorMessage = await response.text();
+            alert('Erro ao atualizar turma: ' + errorMessage);
+        }
+    } catch (error) {
+        console.error('Erro ao atualizar turma:', error);
+        alert('Erro ao atualizar turma.');
     }
 }

@@ -136,7 +136,7 @@ app.get('/aluno', (req, res) => {
 
 // Atualizar aluno
 app.put('/aluno/email/:email', (req, res) => {
-    const { al_email } = req.params;
+    const { email } = req.params;
     const { nome, senha} = req.body;
 
     const query = `UPDATE aluno SET al_nome = ?, al_senha = ? WHERE al_email = ?`;
@@ -286,6 +286,23 @@ app.get('/turma', (req, res) => {
             res.json(rows);  // Retorna todas as turmas
         });
     }
+});
+
+// Atualizar turma
+app.put('/turma/id/:id', (req, res) => {
+    const { id } = req.params;
+    const { nome, desc} = req.body;
+
+    const query = `UPDATE turma SET tu_nome = ?, tu_desc = ? WHERE tu_id = ?`;
+    db.run(query, [nome, desc, id], function (err) {
+        if (err) {
+            return res.status(500).send('Erro ao atualizar turma.');
+        }
+        if (this.changes === 0) {
+            return res.status(404).send('Turma não encontrada.');
+        }
+        res.send('Turma atualizada com sucesso.');
+    });
 });
 
 // Teste para verificar se o servidor está rodando
