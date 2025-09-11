@@ -1,5 +1,10 @@
 async function cadastrarTurma(event) {
     event.preventDefault();
+    const id = document.getElementById("id").value;
+
+    if(id){
+        alert("O ID é atribuído automaticamente, sendo utilizado apenas para atualização.");
+    }
 
     const turma = {
         nome: document.getElementById("nome").value,
@@ -78,11 +83,16 @@ async function atualizarTurma() {
     const id = document.getElementById('id').value;
     const nome = document.getElementById('nome').value;
     const desc = document.getElementById('desc').value;
+    const prid = document.getElementById('prid').value;
 
     const turmaAtualizado = {
         nome,
         desc
     };
+
+    if(prid){
+        alert('Não é possível alterar o id do professor que criou a turma.');
+    }
 
     if(id){
         try {
@@ -96,6 +106,7 @@ async function atualizarTurma() {
 
             if (response.ok) {
                 alert('Turma atualizada com sucesso!');
+                listarTurma(); // atualiza lista automaticamente
             } else {
                 const errorMessage = await response.text();
                 alert('Erro ao atualizar turma: ' + errorMessage);
