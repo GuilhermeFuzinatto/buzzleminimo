@@ -75,31 +75,36 @@ const nome = document.getElementById('nome').value.trim();  // Pega o valor do n
 
 // Função para atualizar as informações da turma
 async function atualizarTurma() {
-    const nome = document.getElementById('tu_nome').value;
-    const desc = document.getElementById('tu_desc').value;
+    const id = document.getElementById('id').value;
+    const nome = document.getElementById('nome').value;
+    const desc = document.getElementById('desc').value;
 
     const turmaAtualizado = {
         nome,
         desc
     };
 
-    try {
-        const response = await fetch(`/turma/id/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(turmaAtualizado)
-        });
+    if(id){
+        try {
+            const response = await fetch(`/turma/id/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(turmaAtualizado)
+            });
 
-        if (response.ok) {
-            alert('Turma atualizada com sucesso!');
-        } else {
-            const errorMessage = await response.text();
-            alert('Erro ao atualizar turma: ' + errorMessage);
+            if (response.ok) {
+                alert('Turma atualizada com sucesso!');
+            } else {
+                const errorMessage = await response.text();
+                alert('Erro ao atualizar turma: ' + errorMessage);
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar turma:', error);
+            alert('Erro ao atualizar turma.');
         }
-    } catch (error) {
-        console.error('Erro ao atualizar turma:', error);
-        alert('Erro ao atualizar turma.');
+    }else{
+        alert('ID é um campo necessário para atualização.');
     }
 }
