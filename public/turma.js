@@ -1,15 +1,15 @@
 async function cadastrarTurma(event) {
     event.preventDefault();
-    const id = document.getElementById("id").value;
+    const tu_id = document.getElementById("id").value;
 
-    if(id){
+    if(tu_id){
         alert("O ID é atribuído automaticamente, sendo utilizado apenas para atualização.");
     }
 
     const turma = {
-        nome: document.getElementById("nome").value,
-        desc: document.getElementById("desc").value,
-        prid: document.getElementById("prid").value
+        tu_nome: document.getElementById("nome").value,
+        tu_desc: document.getElementById("desc").value,
+        tu_pr_id: document.getElementById("prid").value
     };
 
     try {
@@ -37,13 +37,13 @@ async function cadastrarTurma(event) {
 
 // Função para listar as turmas
 async function listarTurma() {
-const nome = document.getElementById('nome').value.trim();  // Pega o valor do nome digitado no input
+const tu_nome = document.getElementById('nome').value.trim();  // Pega o valor do nome digitado no input
     
     let url = '/turma';  // URL padrão para todos os clientes
 
-    if (nome) {
+    if (tu_nome) {
         // Se CPF foi digitado, adiciona o parâmetro de consulta
-        url += `?nome=${nome}`;
+        url += `?tu_nome=${tu_nome}`;
     }
 
     try {
@@ -80,23 +80,23 @@ const nome = document.getElementById('nome').value.trim();  // Pega o valor do n
 
 // Função para atualizar as informações da turma
 async function atualizarTurma() {
-    const id = document.getElementById('id').value;
-    const nome = document.getElementById('nome').value;
-    const desc = document.getElementById('desc').value;
-    const prid = document.getElementById('prid').value;
+    const tu_id = document.getElementById('id').value;
+    const tu_nome = document.getElementById('nome').value;
+    const tu_desc = document.getElementById('desc').value;
+    const tu_prid = document.getElementById('prid').value;
 
     const turmaAtualizado = {
-        nome,
-        desc
+        tu_nome,
+        tu_desc
     };
 
-    if(prid){
+    if(tu_prid){
         alert('Não é possível alterar o id do professor que criou a turma.');
     }
 
-    if(id){
+    if(tu_id){
         try {
-            const response = await fetch(`/turma/id/${id}`, {
+            const response = await fetch(`/turma/tu_id/${tu_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

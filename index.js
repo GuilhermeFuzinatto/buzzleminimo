@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 // Serve os arquivos estáticos da pasta "public"
 app.use(express.static('public'));
@@ -227,15 +227,15 @@ app.put('/prof/email/:email', (req, res) => {
 
 // Cadastrar turma
 app.post('/turma', (req, res) => {
-    const { nome, desc, prid } = req.body;
+    const { tu_nome, tu_desc, tu_pr_id } = req.body;
 
-    if (!nome || !prid) {
+    if (!tu_nome || !tu_pr_id) {
         return res.status(400).send('nome e id do professor são obrigatórios.');
     }
 
     // Verifica se o professor existe
     const checkProf = `SELECT * FROM Prof WHERE pr_id = ?`;
-    db.get(checkProf, [prid], (err, row) => {
+    db.get(checkProf, [tu_pr_id], (err, row) => {
         if (err) {
             console.error(err);
             return res.status(500).send('Erro ao verificar professor.');
@@ -248,7 +248,7 @@ app.post('/turma', (req, res) => {
 
         // Se encontrou o professor, insere a turma
         const query = `INSERT INTO turma (tu_nome, tu_desc, tu_pr_id) VALUES (?, ?, ?)`;
-        db.run(query, [nome, desc, prid], function (err) {
+        db.run(query, [tu_nome, tu_desc, tu_pr_id], function (err) {
             if (err) {
                 return res.status(500).send('Erro ao cadastrar.');
             }
@@ -261,13 +261,13 @@ app.post('/turma', (req, res) => {
 // Listar turmas
 // Endpoint para listar todas as turmas ou buscar por email
 app.get('/turma', (req, res) => {
-    const nome = req.query.nome || '';  // Recebe o nome da query string (se houver)
+    const tu_nome = req.query.nome || '';  // Recebe o nome da query string (se houver)
 
-    if (nome) {
+    if (tu_nome) {
         // Se nome foi passado, busca turmas que possuam esse nome ou parte dele
-        const query = `SELECT * FROM turma WHERE nome LIKE ?`;
+        const query = `SELECT * FROM turma WHERE tu_nome LIKE ?`;
 
-        db.all(query, [`%${nome}%`], (err, rows) => {
+        db.all(query, [`%${tu_nome}%`], (err, rows) => {
             if (err) {
                 console.error(err);
                 return res.status(500).json({ message: 'Erro ao buscar turmas.' });
@@ -289,12 +289,12 @@ app.get('/turma', (req, res) => {
 });
 
 // Atualizar turma
-app.put('/turma/id/:id', (req, res) => {
-    const { id } = req.params;
-    const { nome, desc} = req.body;
+app.put('/turma/tu_id/:tu_id', (req, res) => {
+    const { tu_id } = req.params;
+    const { tu_nome, tu_desc} = req.body;
 
     const query = `UPDATE turma SET tu_nome = ?, tu_desc = ? WHERE tu_id = ?`;
-    db.run(query, [nome, desc, id], function (err) {
+    db.run(query, [tu_nome, tu_desc, tu_id], function (err) {
         if (err) {
             return res.status(500).send('Erro ao atualizar turma.');
         }
@@ -311,6 +311,6 @@ app.get('/', (req, res) => {
 });
 
 // Iniciando o servidor
-app.listen(port, '0.0.0.0', () => {
+app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });
