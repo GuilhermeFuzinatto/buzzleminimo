@@ -7,13 +7,13 @@ async function maisPergunta(){
         divpassado.removeAttribute("id");
     }
 
-    fml.innerHTML += `
+    fml.insertAdjacentHTML(beforeend, `
         <div id="divpe">
-            <p class="pergunta">Pergunta ${totalp}</p>
+            <p class="pergunta">Pergunta ${totalp + 1}</p>
             <input type="text" class="en" placeholder="enunciado">
-            <button onclick="maisAlternativa()">Adicionar Alternativa</button>
+            <button type="button" onclick="maisAlternativa()">Adicionar Alternativa</button>
         </div>
-    `
+    `);
 }
 
 async function maisAlternativa(){
