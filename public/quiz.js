@@ -2,7 +2,7 @@ async function maisPergunta(){
     const fml = document.getElementById("formolario");
     const totalp = fml.querySelectorAll('.pergunta').length;
 
-    if(totalp >= 1){
+    if(totalp > 1){
         const divpassado = document.getElementById("divpe");
         divpassado.removeAttribute("id");
     }
