@@ -305,6 +305,27 @@ app.put('/turma/tu_id/:tu_id', (req, res) => {
     });
 });
 
+///////////////////////////// Rotas para Quiz /////////////////////////////
+///////////////////////////// Rotas para Quiz /////////////////////////////
+///////////////////////////// Rotas para Quiz /////////////////////////////
+
+// Cadastrar quiz
+app.post('/quiz', (req, res) => {
+    const {qz_nome, qz_valor, qz_prazo} = req.body;
+
+    if (!qz_nome || !qz_valor || !qz_prazo) {
+        return res.status(400).send('todos os campos são obrigatórios.');
+    }
+
+    const query = `INSERT INTO Quiz (qz_nome, qz_valor, qz_prazo VALUES (?, ?, ?)`;
+    db.run(query, [qz_nome, qz_valor, qz_prazo], function (err) {
+        if (err) {
+            return res.status(500).send('Erro ao cadastrar.');
+        }
+        res.status(201).send({ id: this.lastID, message: 'cadastrado com sucesso.' });
+    });
+});
+
 // Teste para verificar se o servidor está rodando
 app.get('/', (req, res) => {
     res.send('Servidor está rodando e tabelas criadas!');
