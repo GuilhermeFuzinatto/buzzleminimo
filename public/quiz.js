@@ -1,3 +1,5 @@
+let idatual = null;
+
 async function maisPergunta(){
     const fml = document.getElementById("formolario");
     const totalp = fml.querySelectorAll('.pergunta').length;
@@ -48,6 +50,8 @@ async function cadastrarQuiz(event) {
         if (response.ok) {
             alert("cadastrado com sucesso!");
             document.getElementById("formolario").reset();
+            idatual = result.id;
+            window.location.href = "quiz2.html";
             listarQuiz(); // atualiza lista automaticamente
         } else {
             alert(`Erro: ${result.message}`);
@@ -56,4 +60,4 @@ async function cadastrarQuiz(event) {
         console.error("Erro na solicitação:", err);
         alert("Erro ao cadastrar quiz.");
     }
-}w
+}
