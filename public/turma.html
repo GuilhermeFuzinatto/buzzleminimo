@@ -3,36 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>buzzle merda</title>
+    <link rel="stylesheet" href="turma.css">
+    <title>Turma - Buzzle</title>
 </head>
-<body onload="listarTurma()">
-    <script src="turma.js"></script>
+<body>
     <header>
-        <a href="index.html"><button>Landpage</button></a>
-        <a href="cadastro.html"><button>Cadastro</button></a>
-        <button>Login</button>
-        <button>Perfil</button>
-        <a href="quiz.html"></a><button>Criar Quiz</button></a>
-        <a href="turma.html"><button>Criar Turma</button></a>
-    </header>
-    <main>
         <section>
-            <form id="formolario">
-                <input type="text" id="id" placeholder="id da turma (para atualizar)">
-                <input type="text" id="nome" placeholder="nome da turma">
-                <input type="text" id="desc" placeholder="descricao da turma">
-                <input type="text" id="prid" placeholder="id do professor q fez">
-                <button type="button" onclick="atualizarTurma(event)">Atualizar</button>
-                <button onclick="cadastrarTurma(event)">Confirmar</button>
-            </form>
+            <div id="divlogo">
+                <img src="imagens/logobuzzle.png">
+            </div>
+            <div id="divnav">
+                    
+            </div>
+            <div id="divperfil">
+                    
+            </div>
         </section>
-        <section id="secsoturmas">
-            <!--parte q vai ficar as turma q o javascript vai faze-->
+    </header>
+    <aside>
+        <section id="secnav">
+            <button class="navbut">
+                Configurações
+            </button>
+            <button class="navbut">
+                Início
+            </button>
+        </section>
+        <section id="secturmas">
+            <p id="astitulo">Turmas</p>
+            <section id="subsecturmas">
+                <button class="divtur"></button>
+                <button class="divtur"></button>
+                <button class="divtur"></button>
+            </section>
+        </section>
+    </aside>
+    <main>
+        <section id="fundo">
+            <p id="turmanome">Nome da turma</p>
+            <p id="turmadesc">descrição da turma descrição da turma descrição da turma descrição da turma</p>
+        </section>
+        <section id="secmain">
+
         </section>
     </main>
     <footer>
-        
+        <section id="secfooter">
+            <div></div>
+            <div class="divfot">
+                <img src="imagens/ccm.png">
+                <img src="imagens/governo.png">
+            </div>
+            <div class="divfot">
+                <img src="imagens/marsela.png">
+            </div>
+        </section>
     </footer>
 </body>
 </html>

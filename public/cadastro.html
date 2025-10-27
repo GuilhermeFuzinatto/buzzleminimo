@@ -1,77 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>buzzle merda</title>
-</head>
-<body>
-    <script src="cadastro.js"></script>
-    <header>
-        <a href="index.html"><button>Landpage</button></a>
-        <a href="cadastro.html"><button>Cadastro</button></a>
-        <button>Login</button>
-        <button>Perfil</button>
-        <a href="quiz.html"><button>Criar Quiz</button></a>
-        <a href="turma.html"><button>Criar Turma</button></a>
-    </header>
-    <main>
-        <section>
-            <div class="divertido">
-                cadastrar merda de aluno
-                <form id="al_formolario">
-                    <input type="text" id="al_email" placeholder="seu email">
-                    <input type="text" id="al_nome" placeholder="seu nome">
-                    <input type="password" id="al_senha" placeholder="sua senha">
-                    <button type="button" onclick="atualizarAluno(event)">Atualizar</button>
-                    <button type="button" onclick="cadastrarAluno(event)">Confirmar</button>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="cadastro.css">
+        <title>Cadastro - Buzzle</title>
+    </head>
+    <body>
+        <header>
+            <section>
+                <div id="divlogo">
+                    <img src="imagens/logobuzzle.png">
+                </div>
+                <div id="divnav">
+                    
+                </div>
+                <div id="divperfil">
+                    
+                </div>
+            </section>
+        </header>
+        <main>
+            <section id="fundo">
+                <form class="divprincipal" id="alform">
+                    <div class="divtitle"><p>Aluno</p></div>
+                    <div class="divinput">
+                        <div class="divtext"><input type="text" placeholder="e-mail" id="alemail"></div>
+                        <div class="divtext"><input type="text" placeholder="nome de usuário" id="alnome"></div>
+                        <div class="divsenha" id="aldivsenha"><input type="password" placeholder="senha" id="alsenha"><img src="imagens/venao.png" id="alzoi" onclick="verSenhaAluno()"></div>
+                    </div>
+                    <div class="divbotao">    
+                        <button class="volt">Voltar</button>
+                        <button class="conc" onclick="cadastrarAluno(event)">Concluir</button>
+                    </div>
                 </form>
-            </div>
-            <div class="divertido">
-                cadastrar cu de professor
-                <form id="pr_formolario">
-                    <input type="text" id="pr_email" placeholder="seu email">
-                    <input type="text" id="pr_nome" placeholder="seu nome">
-                    <input type="password" id="pr_senha" placeholder="sua senha">
-                    <button type="button" onclick="atualizarProf(event)">Atualizar</button>
-                    <button type="button" onclick="cadastrarProf(event)">Confirmar</button>
+                <form class="divprincipal" id="prform">
+                    <div class="divtitle"><p>Professor</p></div>
+                    <div class="divinput">
+                        <div class="divtext"><input type="text" placeholder="e-mail" id="premail"></div>
+                        <div class="divtext"><input type="text" placeholder="nome de usuário" id="prnome"></div>
+                        <div class="divsenha" id="prdivsenha"><input type="password" placeholder="senha" id="prsenha"><img src="imagens/venao.png" id="przoi" onclick="verSenhaProf()"></div>
+                    </div>
+                    <div class="divbotao">
+                        <button class="volt">Voltar</button>
+                        <button class="conc" onclick="cadastrarProf(event)">Concluir</button>
+                    </div>
                 </form>
-            </div>
-        </section>
-        <button onclick="listarAluno()">Listar alunos</button>
-        <button onclick="listarProf()">Listar professores</button>
-        <section>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Email</th>
-                        <th>Nome</th>
-                        <th>Senha</th>
-                    </tr>
-                </thead>
-                <tbody id="tabelaaluno">
-                    <!-- Linhas serão preenchidas pelo JavaScript -->
-                </tbody>
-            </table>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Email</th>
-                        <th>Nome</th>
-                        <th>Senha</th>
-                    </tr>
-                </thead>
-                <tbody id="tabelaprof">
-                    <!-- Linhas serão preenchidas pelo JavaScript -->
-                </tbody>
-            </table>
-        </section>
-    </main>
-    <footer>
-        
-    </footer>
-</body>
+            </section>
+        </main>
+        <footer>
+            <section id="secfooter">
+                <div></div>
+                <div class="divfot">
+                    <img src="imagens/ccm.png">
+                    <img src="imagens/governo.png">
+                </div>
+                <div class="divfot">
+                    <img src="imagens/marsela.png">
+                </div>
+            </section>
+        </footer>
+        <script src="cadastro.js"></script>
+    </body>
 </html>

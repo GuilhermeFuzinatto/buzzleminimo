@@ -1,11 +1,41 @@
+function verSenhaAluno() {
+    const inputao = document.getElementById('alsenha');
+    const divzao = document.getElementById('aldivsenha');
+    const imagizona = document.getElementById('alzoi');
+    if (inputao.type === 'password') {
+        inputao.type = 'text';
+        divzao.style.backgroundColor = '#ffda33';
+        imagizona.src = 'imagens/vesim.png';
+    } else {
+        inputao.type = 'password';
+        divzao.style.backgroundColor = '#e4e4e4';
+        imagizona.src = 'imagens/venao.png';
+    }
+}
+
+function verSenhaProf() {
+    const inputao = document.getElementById('prsenha');
+    const divzao = document.getElementById('prdivsenha');
+    const imagizona = document.getElementById('przoi');
+    if (inputao.type === 'password') {
+        inputao.type = 'text';
+        divzao.style.backgroundColor = '#ffda33';
+        imagizona.src = 'imagens/vesim.png';
+    } else {
+        inputao.type = 'password';
+        divzao.style.backgroundColor = '#e4e4e4';
+        imagizona.src = 'imagens/venao.png';
+    }
+}
+
 //Cadastrar Aluno
 async function cadastrarAluno(event) {
     event.preventDefault();
 
     const aluno = {
-        email: document.getElementById("al_email").value,
-        nome: document.getElementById("al_nome").value,
-        senha: document.getElementById("al_senha").value
+        email: document.getElementById("alemail").value,
+        nome: document.getElementById("alnome").value,
+        senha: document.getElementById("alsenha").value
     };
 
     try {
@@ -20,7 +50,7 @@ async function cadastrarAluno(event) {
         const result = await response.json();
         if (response.ok) {
             alert("cadastrado com sucesso!");
-            document.getElementById("al_formolario").reset();
+            document.getElementById("alform").reset();
         } else {
             alert(`Erro: ${result.message}`);
         }
@@ -108,9 +138,9 @@ async function cadastrarProf(event) {
     event.preventDefault();
 
     const prof = {
-        email: document.getElementById("pr_email").value,
-        nome: document.getElementById("pr_nome").value,
-        senha: document.getElementById("pr_senha").value
+        email: document.getElementById("premail").value,
+        nome: document.getElementById("prnome").value,
+        senha: document.getElementById("prsenha").value
     };
 
     try {
@@ -125,7 +155,7 @@ async function cadastrarProf(event) {
         const result = await response.json();
         if (response.ok) {
             alert("cadastrado com sucesso!");
-            document.getElementById("pr_formolario").reset();
+            document.getElementById("prform").reset();
         } else {
             alert(`Erro: ${result.message}`);
         }
